@@ -19,7 +19,7 @@
         public Dia Dia { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
-        public double Monto { get; set; }
+        public decimal Monto { get; set; }
 
         [Display(Name = "Is Availabe?")]
         public bool IsAvailabe { get; set; }

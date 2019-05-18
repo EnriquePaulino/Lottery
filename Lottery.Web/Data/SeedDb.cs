@@ -1,24 +1,54 @@
 ﻿namespace Lottery.Web.Data
-{
+{    
     using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Entities;
+    using Helpers;
+    using Microsoft.AspNetCore.Identity;
 
     public class SeedDb
     {
         private readonly DataContext context;
+        private readonly IUserHelper userHelper;
         private readonly Random random;
 
-        public SeedDb(DataContext context)
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             this.context = context;
+            this.userHelper = userHelper;
             this.random = new Random();
         }
 
         public async Task SeedAsync()
         {
             await this.context.Database.EnsureCreatedAsync();
+
+            var user = await this.userHelper.GetUserByEmailAsync("paulinoenrique@gmail.com");
+            if (user == null)
+            {
+                user = new User
+                {
+                    FirstName = "Enrique",
+                    LastName = "Paulino",
+                    Email = "paulinoenrique@gmail.com",
+                    UserName = "paulinoenrique@gmail.com",
+                    PhoneNumber = "(809) 710-5012"
+                };
+
+                var result = await this.userHelper.AddUserAsync(user, "123456");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Could not create the user in seeder");
+                }
+            }
+
+            if (!this.context.Bancas.Any())
+            {
+                this.AddBancas("Enrique", user);
+                this.AddBancas("Paulino", user);
+                await this.context.SaveChangesAsync();
+            }
 
             if (!this.context.Dias.Any())
             {
@@ -70,6 +100,17 @@
                 this.AddLoterias("Loteka");
                 await this.context.SaveChangesAsync();
             }
+        }
+
+        private void AddBancas(string name, User user)
+        {
+            this.context.Bancas.Add(new Banca
+            {
+                Name = name,
+                Monto = 10000,
+                IsAvailabe = true,
+                User = user
+            });
         }
 
         private void AddDia(string name)

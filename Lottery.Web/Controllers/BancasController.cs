@@ -1,86 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Lottery.Web.Data;
-using Lottery.Web.Data.Entities;
-using Lottery.Web.Data.Repositories;
-
-namespace Lottery.Web.Controllers
+﻿namespace Lottery.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using Data;
+    using Data.Entities;
+    using Helpers;
+    using Lottery.Web.Data.Repositories;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+
     public class BancasController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IBancaRepository bancaRepository;
+        private readonly IUserHelper userHelper;
 
-        public BancasController(IRepository repository)
+        public BancasController(IBancaRepository bancaRepository, IUserHelper userHelper)
         {
-            this.repository = repository;
+            this.bancaRepository = bancaRepository;
+            this.userHelper = userHelper;
         }
 
-        // GET: Bancas
+        // GET: Products
         public IActionResult Index()
         {
-            return View(this.repository.GetBancas());
+            return View(this.bancaRepository.GetAll());
         }
 
-        // GET: Bancas/Details/5
-        public IActionResult Details(int? id)
+        // GET: Products/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var banca = this.repository.GetBanca(id.Value);
-            if (banca == null)
+            var product = await this.bancaRepository.GetByIdAsync(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(banca);
+            return View(product);
         }
 
-        // GET: Bancas/Create
+        // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Bancas/Create
+        // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Banca banca)
         {
             if (ModelState.IsValid)
             {
-                this.repository.AddBanca(banca);
-                await this.repository.SaveAllAsync();
+                // TODO: Pending to change to: this.User.Identity.Name
+                banca.User = await this.userHelper.GetUserByEmailAsync("paulinoenrique@gmail.com");
+                await this.bancaRepository.CreateAsync(banca);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(banca);
         }
 
-        // GET: Bancas/Edit/5
-        public IActionResult Edit(int? id)
+        // GET: Products/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var banca = this.repository.GetBanca(id.Value);
-            if (banca == null)
+            var product = await this.bancaRepository.GetByIdAsync(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(banca);
+            return View(product);
         }
 
-        // POST: Bancas/Edit/5
+        // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Banca banca)
@@ -89,12 +90,13 @@ namespace Lottery.Web.Controllers
             {
                 try
                 {
-                    this.repository.UpdateBanca(banca);
-                    await this.repository.SaveAllAsync();
+                    // TODO: Pending to change to: this.User.Identity.Name
+                    banca.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                    await this.bancaRepository.UpdateAsync(banca);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.BancaExists(banca.Id))
+                    if (!await this.bancaRepository.ExistAsync(banca.Id))
                     {
                         return NotFound();
                     }
@@ -109,31 +111,30 @@ namespace Lottery.Web.Controllers
             return View(banca);
         }
 
-        // GET: Bancas/Delete/5
-        public IActionResult Delete(int? id)
+        // GET: Products/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var banca = this.repository.GetBanca(id.Value);
-            if (banca == null)
+            var product = await this.bancaRepository.GetByIdAsync(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(banca);
+            return View(product);
         }
 
-        // POST: Bancas/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var banca = this.repository.GetBanca(id);
-            this.repository.RemoveBanca(banca);
-            await this.repository.SaveAllAsync();
+            var product = await this.bancaRepository.GetByIdAsync(id);
+            await this.bancaRepository.DeleteAsync(product);
             return RedirectToAction(nameof(Index));
         }
     }

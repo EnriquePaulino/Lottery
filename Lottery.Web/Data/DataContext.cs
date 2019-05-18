@@ -1,9 +1,10 @@
 ﻿namespace Lottery.Web.Data
 {
     using Entities;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DbSet<Banca> Bancas { get; set; }
 

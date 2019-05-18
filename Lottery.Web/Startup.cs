@@ -1,6 +1,7 @@
 ﻿namespace Lottery.Web
 {
     using Data;
+    using Lottery.Web.Data.Repositories;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -27,6 +28,8 @@
             });
 
             services.AddTransient<SeedDb>();
+
+            services.AddScoped<IRepository, Repository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

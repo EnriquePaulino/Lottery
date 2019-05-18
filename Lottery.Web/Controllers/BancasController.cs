@@ -7,34 +7,34 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Lottery.Web.Data;
 using Lottery.Web.Data.Entities;
+using Lottery.Web.Data.Repositories;
 
 namespace Lottery.Web.Controllers
 {
     public class BancasController : Controller
     {
-        private readonly DataContext _context;
+        private readonly IRepository repository;
 
-        public BancasController(DataContext context)
+        public BancasController(IRepository repository)
         {
-            _context = context;
+            this.repository = repository;
         }
 
         // GET: Bancas
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Bancas.ToListAsync());
+            return View(this.repository.GetBancas());
         }
 
         // GET: Bancas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var banca = await _context.Bancas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var banca = this.repository.GetBanca(id.Value);
             if (banca == null)
             {
                 return NotFound();
@@ -50,59 +50,51 @@ namespace Lottery.Web.Controllers
         }
 
         // POST: Bancas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Monto,IsAvailabe")] Banca banca)
+        public async Task<IActionResult> Create(Banca banca)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(banca);
-                await _context.SaveChangesAsync();
+                this.repository.AddBanca(banca);
+                await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(banca);
         }
 
         // GET: Bancas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var banca = await _context.Bancas.FindAsync(id);
+            var banca = this.repository.GetBanca(id.Value);
             if (banca == null)
             {
                 return NotFound();
             }
+
             return View(banca);
         }
 
         // POST: Bancas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Monto,IsAvailabe")] Banca banca)
+        public async Task<IActionResult> Edit(Banca banca)
         {
-            if (id != banca.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(banca);
-                    await _context.SaveChangesAsync();
+                    this.repository.UpdateBanca(banca);
+                    await this.repository.SaveAllAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BancaExists(banca.Id))
+                    if (!this.repository.BancaExists(banca.Id))
                     {
                         return NotFound();
                     }
@@ -113,19 +105,19 @@ namespace Lottery.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(banca);
         }
 
         // GET: Bancas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var banca = await _context.Bancas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var banca = this.repository.GetBanca(id.Value);
             if (banca == null)
             {
                 return NotFound();
@@ -139,15 +131,10 @@ namespace Lottery.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var banca = await _context.Bancas.FindAsync(id);
-            _context.Bancas.Remove(banca);
-            await _context.SaveChangesAsync();
+            var banca = this.repository.GetBanca(id);
+            this.repository.RemoveBanca(banca);
+            await this.repository.SaveAllAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool BancaExists(int id)
-        {
-            return _context.Bancas.Any(e => e.Id == id);
         }
     }
 }

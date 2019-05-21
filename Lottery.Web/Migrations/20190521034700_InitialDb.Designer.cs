@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lottery.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190518144203_Users")]
-    partial class Users
+    [Migration("20190521034700_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,172 +27,47 @@ namespace Lottery.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GastoId");
-
-                    b.Property<int?>("HorarioId");
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<int?>("LocalidadId");
-
-                    b.Property<int?>("LoteriaId");
-
-                    b.Property<decimal>("Monto");
+                    b.Property<int?>("LocationId");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<int?>("PrecioId");
+                    b.Property<int?>("OwnerId");
 
-                    b.Property<int?>("PropietarioId");
+                    b.Property<bool>("Status");
 
                     b.Property<string>("UserId");
 
-                    b.Property<int?>("ZonaId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("GastoId");
+                    b.HasIndex("LocationId");
 
-                    b.HasIndex("HorarioId");
-
-                    b.HasIndex("LocalidadId");
-
-                    b.HasIndex("LoteriaId");
-
-                    b.HasIndex("PrecioId");
-
-                    b.HasIndex("PropietarioId");
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("ZonaId");
-
-                    b.ToTable("Bancas");
+                    b.ToTable("Lottery_Banks");
                 });
 
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Dia", b =>
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsAvailabe");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Dias");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Frecuencia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60);
+                    b.Property<bool>("status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Frecuencias");
+                    b.ToTable("Lottery_Location");
                 });
 
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Gasto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Gastos");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.GastoDetalle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DiaId");
-
-                    b.Property<int?>("FrecuenciaId");
-
-                    b.Property<int>("GastoId");
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<decimal>("Monto");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DiaId");
-
-                    b.HasIndex("FrecuenciaId");
-
-                    b.HasIndex("GastoId");
-
-                    b.ToTable("GastoDetalles");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Horario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("HorarioFinaliza")
-                        .HasMaxLength(15);
-
-                    b.Property<string>("HorarioInicio")
-                        .HasMaxLength(15);
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Horarios");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Localidad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60);
-
-                    b.Property<int>("Zona");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Localidades");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Loteria", b =>
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Lottery", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -212,61 +87,24 @@ namespace Lottery.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Loterias");
+                    b.ToTable("Lottery_Lottery");
                 });
 
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Precio", b =>
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Owner", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("Cash3Box");
-
-                    b.Property<double>("Cash3Straight");
-
-                    b.Property<double>("Directo");
-
-                    b.Property<int>("IdLoteria");
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<double>("Pale");
-
-                    b.Property<double>("Pick2");
-
-                    b.Property<double>("Pick5Box");
-
-                    b.Property<double>("Pick5String");
-
-                    b.Property<double>("Play4Box");
-
-                    b.Property<double>("Play4Straight");
-
-                    b.Property<double>("SuperPale");
-
-                    b.Property<double>("Tripleta");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Precios");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Propietario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsAvailabe");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60);
 
+                    b.Property<bool>("status");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Propietarios");
+                    b.ToTable("Lottery_Owner");
                 });
 
             modelBuilder.Entity("Lottery.Web.Data.Entities.User", b =>
@@ -322,26 +160,6 @@ namespace Lottery.Web.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Zona", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60);
-
-                    b.Property<string>("Sigla")
-                        .HasMaxLength(5);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Zonas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -456,54 +274,17 @@ namespace Lottery.Web.Migrations
 
             modelBuilder.Entity("Lottery.Web.Data.Entities.Banca", b =>
                 {
-                    b.HasOne("Lottery.Web.Data.Entities.Gasto", "Gasto")
+                    b.HasOne("Lottery.Web.Data.Entities.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("GastoId");
+                        .HasForeignKey("LocationId");
 
-                    b.HasOne("Lottery.Web.Data.Entities.Horario", "Horario")
+                    b.HasOne("Lottery.Web.Data.Entities.Owner", "Owner")
                         .WithMany()
-                        .HasForeignKey("HorarioId");
-
-                    b.HasOne("Lottery.Web.Data.Entities.Localidad", "Localidad")
-                        .WithMany()
-                        .HasForeignKey("LocalidadId");
-
-                    b.HasOne("Lottery.Web.Data.Entities.Loteria", "Loteria")
-                        .WithMany()
-                        .HasForeignKey("LoteriaId");
-
-                    b.HasOne("Lottery.Web.Data.Entities.Precio", "Precio")
-                        .WithMany()
-                        .HasForeignKey("PrecioId");
-
-                    b.HasOne("Lottery.Web.Data.Entities.Propietario", "Propietario")
-                        .WithMany()
-                        .HasForeignKey("PropietarioId");
+                        .HasForeignKey("OwnerId");
 
                     b.HasOne("Lottery.Web.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.HasOne("Lottery.Web.Data.Entities.Zona", "Zona")
-                        .WithMany()
-                        .HasForeignKey("ZonaId");
-                });
-
-            modelBuilder.Entity("Lottery.Web.Data.Entities.GastoDetalle", b =>
-                {
-                    b.HasOne("Lottery.Web.Data.Entities.Dia", "Dia")
-                        .WithMany()
-                        .HasForeignKey("DiaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Lottery.Web.Data.Entities.Frecuencia", "Frecuencia")
-                        .WithMany()
-                        .HasForeignKey("FrecuenciaId");
-
-                    b.HasOne("Lottery.Web.Data.Entities.Gasto", "Gasto")
-                        .WithMany()
-                        .HasForeignKey("GastoId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

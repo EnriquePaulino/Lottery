@@ -43,106 +43,80 @@
                 }
             }
 
-            if (!this.context.Bancas.Any())
+            if (!this.context.Lottery_Banks.Any())
             {
-                this.AddBancas("Enrique", user);
-                this.AddBancas("Paulino", user);
+                this.AddBanks("Enrique", user);
+                this.AddBanks("Paulino", user);
                 await this.context.SaveChangesAsync();
             }
 
-            if (!this.context.Dias.Any())
+            if (!this.context.Lottery_Owner.Any())
             {
-                this.AddDia("Lunes");
-                this.AddDia("Martes");
-                this.AddDia("Miercoles");
-                this.AddDia("Jueves");
-                this.AddDia("Viernes");
-                this.AddDia("Sabado");
-                this.AddDia("Domingo");
+                this.AddOwner("Farmacia Medicina", user);
                 await this.context.SaveChangesAsync();
             }
 
-            if (!this.context.Frecuencias.Any())
+            if (!this.context.Lottery_Location.Any())
             {
-                this.AddFrecuencias("Diario");
-                this.AddFrecuencias("Semanal");
-                this.AddFrecuencias("Quincenal");
-                this.AddFrecuencias("Mensual");
-                this.AddFrecuencias("Anual");
+                this.AddLocation("Florida", user);
+                this.AddLocation("New Jersey", user);
                 await this.context.SaveChangesAsync();
             }
 
-            if (!this.context.Zonas.Any())
+            if (!this.context.Lottery_Lottery.Any())
             {
-                this.AddZonas("Florida");
-                this.AddZonas("New Jersey");
-                await this.context.SaveChangesAsync();
-            }
-
-            if (!this.context.Loterias.Any())
-            {
-                this.AddLoterias("New York (am)");
-                this.AddLoterias("New Jersey (am)");
-                this.AddLoterias("Florida (am)");
-                this.AddLoterias("Super Pale Real");
-                this.AddLoterias("Loteria Real (1:00 pm)");
-                this.AddLoterias("Gana Mas (3:00 pm)");
-                this.AddLoterias("New York (pm)");
-                this.AddLoterias("Florida (pm)");
-                this.AddLoterias("Super Pale Diario");
-                this.AddLoterias("Quiniela Pale (Leidsa)");
-                this.AddLoterias("Nacional (pm)");
-                this.AddLoterias("New Jersey (pm)");
-                this.AddLoterias("Connecticut (am)");
-                this.AddLoterias("Connecticut (pm)");
-                this.AddLoterias("Florida Pick2 (am)");
-                this.AddLoterias("Florida Pick2 (pm)");
-                this.AddLoterias("Loteka");
+                this.AddLottery("New York (am)");
+                this.AddLottery("New Jersey (am)");
+                this.AddLottery("Florida (am)");
+                this.AddLottery("Super Pale Real");
+                this.AddLottery("Loteria Real (1:00 pm)");
+                this.AddLottery("Gana Mas (3:00 pm)");
+                this.AddLottery("New York (pm)");
+                this.AddLottery("Florida (pm)");
+                this.AddLottery("Super Pale Diario");
+                this.AddLottery("Quiniela Pale (Leidsa)");
+                this.AddLottery("Nacional (pm)");
+                this.AddLottery("New Jersey (pm)");
+                this.AddLottery("Connecticut (am)");
+                this.AddLottery("Connecticut (pm)");
+                this.AddLottery("Florida Pick2 (am)");
+                this.AddLottery("Florida Pick2 (pm)");
+                this.AddLottery("Loteka");
                 await this.context.SaveChangesAsync();
             }
         }
 
-        private void AddBancas(string name, User user)
+        private void AddBanks(string name, User user)
         {
-            this.context.Bancas.Add(new Banca
+            this.context.Lottery_Banks.Add(new Banca
             {
                 Name = name,
-                Monto = 10000,
-                IsAvailabe = true,
+                Status = true,
                 User = user
             });
         }
 
-        private void AddDia(string name)
+        private void AddOwner(string name, User user)
         {
-            this.context.Dias.Add(new Dia
+            this.context.Lottery_Owner.Add(new Owner
             {
                 Name = name,
-                IsAvailabe = true
+                status = true
             });
         }
 
-        private void AddFrecuencias(string name)
+        private void AddLocation(string name, User user)
         {
-            this.context.Frecuencias.Add(new Frecuencia
+            this.context.Lottery_Location.Add(new Location
             {
                 Name = name,
-                IsAvailabe = true
+                status = true
             });
         }
 
-        private void AddZonas(string name)
+        private void AddLottery(string name)
         {
-            this.context.Zonas.Add(new Zona
-            {
-                Name = name,
-                IsAvailabe = true
-            });
-        }
-
-        private void AddLoterias(string name)
-        {
-            this.context.Loterias.Add(new Loteria
+            this.context.Lottery_Lottery.Add(new Lottery
             {
                 Name = name,
                 IsAvailabe = true

@@ -6,30 +6,18 @@
     {
         public int Id { get; set; }
 
-        [Display(Name = "Nombre")]
+        [Display(Name = "Name Bank")]
         [MaxLength(60, ErrorMessage = "The field {0} only can contain {1} characters length.")]
         [Required]
         public string Name { get; set; }
 
-        public Propietario Propietario { get; set; }
+        [Display(Name = "Name Owner")]
+        public Owner Owner { get; set; }
 
-        public Localidad Localidad { get; set; }
+        [Display(Name = "Indicate Locality")]
+        public Location Location { get; set; }
 
-        public Horario Horario { get; set; }
-
-        public Precio Precio { get; set; }
-
-        public Loteria Loteria { get; set; }
-
-        public Gasto Gasto { get; set; }
-
-        public Zona Zona { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
-        public decimal Monto { get; set; }
-
-        [Display(Name = "Is Availabe?")]
-        public bool IsAvailabe { get; set; }
+        public bool Status { get; set; }
 
         public User User { get; set; }
     }

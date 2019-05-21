@@ -1,46 +1,226 @@
-﻿@model Lottery.Web.Data.Entities.Banca
+﻿@model Lottery.Web.Models.BancaViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
-
-<h4>Banca</h4>
+<h2>Create Banks</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+<div class="container">
+    <form asp-action="Create">
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#banca-tab" aria-expanded="true">Banking Data</a>
+                </li>
+                <li><a data-toggle="tab" href="#configuratio-tab">Configuration</a></li>
+                <li><a data-toggle="tab" href="#hour-tab">schedule</a></li>
+                <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="banca-tab" class="tab-pane fade in active">
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Monto" class="control-label"></label>
-                <input asp-for="Monto" class="form-control" />
-                <span asp-validation-for="Monto" class="text-danger"></span>
-            </div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
 
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsAvailabe" /> @Html.DisplayNameFor(model => model.IsAvailabe)
-                    </label>
+                            <div class="form-group">
+                                <label asp-for="OwnerId" class="control-label"></label>
+                                <select asp-for="OwnerId" asp-items="Model.Owner" class="form-control"></select>
+                                <span asp-validation-for="OwnerId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="LocationId" class="control-label"></label>
+                                <select asp-for="LocationId" asp-items="Model.Location" class="form-control"></select>
+                                <span asp-validation-for="LocationId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="configuratio-tab" class="tab-pane fade">
+                    <div class="form-group ">
+                    </div>
+                </div>
+                <div id="hour-tab" class="tab-pane fade">
+                    <div class="form-group ">
+                        <div>
+                            <table id="opening-and-closing-times-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Lunes</td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td>
+                                                                <td class="separator">&nbsp;</td>
+                                                                <td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td>
+                                                                <td class="separator">&nbsp;</td>
+                                                                <td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td>
+                                                                <td class="separator">:</td>
+                                                                <td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td>
+                                                                <td class="separator">&nbsp;</td>
+                                                                <td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td>
+                                                                <td class="separator"></td>
+                                                                <td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td>
+                                                                <td class="separator">&nbsp;</td>
+                                                                <td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <input id="openingTimes_0" name="openingTimes[0]" type="text" class="time-picker input-small" value="12:00 AM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="closingTimes_0" name="closingTimes[0]" type="text" class="time-picker input-small" value="11:59 PM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Martes</td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="openingTimes_1" name="openingTimes[1]" type="text" class="time-picker input-small" value="12:00 AM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="closingTimes_1" name="closingTimes[1]" type="text" class="time-picker input-small" value="11:59 PM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Miércoles</td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="openingTimes_2" name="openingTimes[2]" type="text" class="time-picker input-small" value="12:00 AM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="closingTimes_2" name="closingTimes[2]" type="text" class="time-picker input-small" value="11:59 PM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jueves</td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="openingTimes_3" name="openingTimes[3]" type="text" class="time-picker input-small" value="12:00 AM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="closingTimes_3" name="closingTimes[3]" type="text" class="time-picker input-small" value="11:59 PM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Viernes</td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="openingTimes_4" name="openingTimes[4]" type="text" class="time-picker input-small" value="12:00 AM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="closingTimes_4" name="closingTimes[4]" type="text" class="time-picker input-small" value="11:59 PM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sábado</td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="openingTimes_5" name="openingTimes[5]" type="text" class="time-picker input-small" value="12:00 AM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="closingTimes_5" name="closingTimes[5]" type="text" class="time-picker input-small" value="11:59 PM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Domingo</td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="openingTimes_6" name="openingTimes[6]" type="text" class="time-picker input-small" value="12:00 AM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker  input-append">
+                                                <div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="fa fa-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-up"></i></a></td></tr><tr><td><input type="text" name="hour" class="bootstrap-timepicker-hour" maxlength="2"></td> <td class="separator">:</td><td><input type="text" name="minute" class="bootstrap-timepicker-minute" maxlength="2"></td> <td class="separator">&nbsp;</td><td><input type="text" name="meridian" class="bootstrap-timepicker-meridian" maxlength="2"></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="fa fa-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="fa fa-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="fa fa-chevron-down"></i></a></td></tr></tbody></table></div>
+                                                <input id="closingTimes_6" name="closingTimes[6]" type="text" class="time-picker input-small" value="11:59 PM">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o bigger-110"></i> </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                                <thead>
+                                    <tr>
+                                        <th>Día</th>
+                                        <th class="opening-closing-time-column">Apertura</th>
+                                        <th class="opening-closing-time-column">Cierre</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-                <a asp-action="Index"  class="btn btn-success">Back to List</a>
-            </div>
-        </form>
-    </div>
+        <div class="form-group ">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </form>
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

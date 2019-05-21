@@ -5,6 +5,7 @@
     using Data.Entities;
     using Helpers;
     using Lottery.Web.Data.Repositories;
+    using Lottery.Web.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -45,7 +46,16 @@
         // GET: Products/Create
         public IActionResult Create()
         {
-            return View();
+            var Owner = new BancaViewModel
+            {
+                Owner = this.bancaRepository.GetComboOwner()
+            };
+
+            var Location = new BancaViewModel
+            {
+                Location = this.bancaRepository.GetComboLocation()
+            };
+            return this.View(Location);
         }
 
         // POST: Products/Create

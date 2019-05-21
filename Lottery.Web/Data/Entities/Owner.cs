@@ -2,16 +2,15 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Gasto : IEntity
+    public class Owner
     {
         public int Id { get; set; }
 
-        [Display(Name = "Gastos")]
-        [MaxLength(60)]
+        [Display(Name = "Nombre")]
+        [MaxLength(60, ErrorMessage = "The field {0} only can contain {1} characters length.")]
         [Required]
         public string Name { get; set; }
 
-        [Display(Name = "Is Availabe?")]
-        public bool IsAvailabe { get; set; }
+        public bool status { get; set; }
     }
 }

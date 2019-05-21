@@ -6,27 +6,13 @@
 
     public class DataContext : IdentityDbContext<User>
     {
-        public DbSet<Banca> Bancas { get; set; }
+        public DbSet<Banca> Lottery_Banks { get; set; }
 
-        public DbSet<Dia> Dias { get; set; }
+        public DbSet<Lottery> Lottery_Lottery { get; set; }
 
-        public DbSet<Frecuencia> Frecuencias { get; set; }
+        public DbSet<Owner> Lottery_Owner { get; set; }
 
-        public DbSet<Gasto> Gastos { get; set; }
-
-        public DbSet<GastoDetalle> GastoDetalles { get; set; }
-
-        public DbSet<Horario> Horarios { get; set; }
-
-        public DbSet<Localidad> Localidades { get; set; }
-
-        public DbSet<Loteria> Loterias { get; set; }
-
-        public DbSet<Precio> Precios { get; set; }
-
-        public DbSet<Propietario> Propietarios { get; set; }
-
-        public DbSet<Zona> Zonas { get; set; }
+        public DbSet<Location> Lottery_Location { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

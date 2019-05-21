@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lottery.Web.Migrations
 {
-    public partial class Users : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,80 +50,21 @@ namespace Lottery.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dias",
+                name: "Lottery_Location",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false)
+                    status = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dias", x => x.Id);
+                    table.PrimaryKey("PK_Lottery_Location", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Frecuencias",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 60, nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Frecuencias", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Gastos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 60, nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Gastos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Horarios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 60, nullable: false),
-                    HorarioInicio = table.Column<string>(maxLength: 15, nullable: true),
-                    HorarioFinaliza = table.Column<string>(maxLength: 15, nullable: true),
-                    IsAvailabe = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Horarios", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Localidades",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 60, nullable: false),
-                    Zona = table.Column<int>(nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Localidades", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Loterias",
+                name: "Lottery_Lottery",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -135,61 +76,21 @@ namespace Lottery.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Loterias", x => x.Id);
+                    table.PrimaryKey("PK_Lottery_Lottery", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Precios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IdLoteria = table.Column<int>(nullable: false),
-                    Directo = table.Column<double>(nullable: false),
-                    Pale = table.Column<double>(nullable: false),
-                    Tripleta = table.Column<double>(nullable: false),
-                    Cash3Straight = table.Column<double>(nullable: false),
-                    Cash3Box = table.Column<double>(nullable: false),
-                    Play4Straight = table.Column<double>(nullable: false),
-                    Play4Box = table.Column<double>(nullable: false),
-                    SuperPale = table.Column<double>(nullable: false),
-                    Pick5String = table.Column<double>(nullable: false),
-                    Pick5Box = table.Column<double>(nullable: false),
-                    Pick2 = table.Column<double>(nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Precios", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Propietarios",
+                name: "Lottery_Owner",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false)
+                    status = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Propietarios", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Zonas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 60, nullable: false),
-                    Sigla = table.Column<string>(maxLength: 5, nullable: true),
-                    IsAvailabe = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Zonas", x => x.Id);
+                    table.PrimaryKey("PK_Lottery_Owner", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -299,107 +200,36 @@ namespace Lottery.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GastoDetalles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    GastoId = table.Column<int>(nullable: false),
-                    FrecuenciaId = table.Column<int>(nullable: true),
-                    DiaId = table.Column<int>(nullable: false),
-                    Monto = table.Column<decimal>(nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GastoDetalles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_GastoDetalles_Dias_DiaId",
-                        column: x => x.DiaId,
-                        principalTable: "Dias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GastoDetalles_Frecuencias_FrecuenciaId",
-                        column: x => x.FrecuenciaId,
-                        principalTable: "Frecuencias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_GastoDetalles_Gastos_GastoId",
-                        column: x => x.GastoId,
-                        principalTable: "Gastos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bancas",
+                name: "Lottery_Banks",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
-                    PropietarioId = table.Column<int>(nullable: true),
-                    LocalidadId = table.Column<int>(nullable: true),
-                    HorarioId = table.Column<int>(nullable: true),
-                    PrecioId = table.Column<int>(nullable: true),
-                    LoteriaId = table.Column<int>(nullable: true),
-                    GastoId = table.Column<int>(nullable: true),
-                    ZonaId = table.Column<int>(nullable: true),
-                    Monto = table.Column<decimal>(nullable: false),
-                    IsAvailabe = table.Column<bool>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: true),
+                    LocationId = table.Column<int>(nullable: true),
+                    Status = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bancas", x => x.Id);
+                    table.PrimaryKey("PK_Lottery_Banks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bancas_Gastos_GastoId",
-                        column: x => x.GastoId,
-                        principalTable: "Gastos",
+                        name: "FK_Lottery_Banks_Lottery_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Lottery_Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Bancas_Horarios_HorarioId",
-                        column: x => x.HorarioId,
-                        principalTable: "Horarios",
+                        name: "FK_Lottery_Banks_Lottery_Owner_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Lottery_Owner",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Bancas_Localidades_LocalidadId",
-                        column: x => x.LocalidadId,
-                        principalTable: "Localidades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bancas_Loterias_LoteriaId",
-                        column: x => x.LoteriaId,
-                        principalTable: "Loterias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bancas_Precios_PrecioId",
-                        column: x => x.PrecioId,
-                        principalTable: "Precios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bancas_Propietarios_PropietarioId",
-                        column: x => x.PropietarioId,
-                        principalTable: "Propietarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bancas_AspNetUsers_UserId",
+                        name: "FK_Lottery_Banks_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bancas_Zonas_ZonaId",
-                        column: x => x.ZonaId,
-                        principalTable: "Zonas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -444,59 +274,19 @@ namespace Lottery.Web.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bancas_GastoId",
-                table: "Bancas",
-                column: "GastoId");
+                name: "IX_Lottery_Banks_LocationId",
+                table: "Lottery_Banks",
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bancas_HorarioId",
-                table: "Bancas",
-                column: "HorarioId");
+                name: "IX_Lottery_Banks_OwnerId",
+                table: "Lottery_Banks",
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bancas_LocalidadId",
-                table: "Bancas",
-                column: "LocalidadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bancas_LoteriaId",
-                table: "Bancas",
-                column: "LoteriaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bancas_PrecioId",
-                table: "Bancas",
-                column: "PrecioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bancas_PropietarioId",
-                table: "Bancas",
-                column: "PropietarioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bancas_UserId",
-                table: "Bancas",
+                name: "IX_Lottery_Banks_UserId",
+                table: "Lottery_Banks",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bancas_ZonaId",
-                table: "Bancas",
-                column: "ZonaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GastoDetalles_DiaId",
-                table: "GastoDetalles",
-                column: "DiaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GastoDetalles_FrecuenciaId",
-                table: "GastoDetalles",
-                column: "FrecuenciaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GastoDetalles_GastoId",
-                table: "GastoDetalles",
-                column: "GastoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -517,43 +307,22 @@ namespace Lottery.Web.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Bancas");
+                name: "Lottery_Banks");
 
             migrationBuilder.DropTable(
-                name: "GastoDetalles");
+                name: "Lottery_Lottery");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Horarios");
+                name: "Lottery_Location");
 
             migrationBuilder.DropTable(
-                name: "Localidades");
-
-            migrationBuilder.DropTable(
-                name: "Loterias");
-
-            migrationBuilder.DropTable(
-                name: "Precios");
-
-            migrationBuilder.DropTable(
-                name: "Propietarios");
+                name: "Lottery_Owner");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Zonas");
-
-            migrationBuilder.DropTable(
-                name: "Dias");
-
-            migrationBuilder.DropTable(
-                name: "Frecuencias");
-
-            migrationBuilder.DropTable(
-                name: "Gastos");
         }
     }
 }

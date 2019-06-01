@@ -1,9 +1,9 @@
 ﻿namespace Lottery.Web
 {
     using Data;
-    using Lottery.Web.Data.Entities;
-    using Lottery.Web.Data.Repositories;
-    using Lottery.Web.Helpers;
+    using Data.Entities;
+    using Data.Repositories;
+    using Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;

@@ -1,16 +1,17 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace Lottery.UIForms
+﻿namespace Lottery.UIForms
 {
+    using Lottery.UIForms.Views;
+    using System;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

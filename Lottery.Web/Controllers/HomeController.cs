@@ -10,6 +10,10 @@
         {
             return View();
         }
+        public IActionResult Main()
+        {
+            return View();
+        }
 
         public IActionResult About()
         {

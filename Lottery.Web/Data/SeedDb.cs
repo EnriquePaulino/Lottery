@@ -43,27 +43,27 @@
                 }
             }
 
-            if (!this.context.Lottery_Banks.Any())
+            if (!this.context.Lottery_Banca.Any())
             {
                 this.AddBanks("Enrique", user);
                 this.AddBanks("Paulino", user);
                 await this.context.SaveChangesAsync();
             }
 
-            if (!this.context.Lottery_Owner.Any())
+            if (!this.context.Lottery_Propietario.Any())
             {
-                this.AddOwner("Farmacia Medicina", user);
+                this.AddPropietario("Farmacia Medicina", user);
                 await this.context.SaveChangesAsync();
             }
 
-            if (!this.context.Lottery_Location.Any())
+            if (!this.context.Lottery_Zona.Any())
             {
-                this.AddLocation("Florida", user);
-                this.AddLocation("New Jersey", user);
+                this.AddZona("Florida");
+                this.AddZona("New Jersey");
                 await this.context.SaveChangesAsync();
             }
 
-            if (!this.context.Lottery_Lottery.Any())
+            if (!this.context.Lottery_Loteria.Any())
             {
                 this.AddLottery("New York (am)");
                 this.AddLottery("New Jersey (am)");
@@ -88,38 +88,38 @@
 
         private void AddBanks(string name, User user)
         {
-            this.context.Lottery_Banks.Add(new Banca
+            this.context.Lottery_Banca.Add(new Banca
             {
-                Name = name,
+                Descripcion = name,
                 Status = true,
                 User = user
             });
         }
 
-        private void AddOwner(string name, User user)
+        private void AddPropietario(string name, User user)
         {
-            this.context.Lottery_Owner.Add(new Owner
+            this.context.Lottery_Propietario.Add(new Propietario
             {
-                Name = name,
+                Nombre = name,
                 status = true
             });
         }
 
-        private void AddLocation(string name, User user)
+        private void AddZona(string name)
         {
-            this.context.Lottery_Location.Add(new Location
+            this.context.Lottery_Zona.Add(new Zona
             {
-                Name = name,
+                Descripcion = name,
                 status = true
             });
         }
 
         private void AddLottery(string name)
         {
-            this.context.Lottery_Lottery.Add(new Lottery
+            this.context.Lottery_Loteria.Add(new Loteria
             {
-                Name = name,
-                IsAvailabe = true
+                Descripcion = name,
+                status = true
             });
         }
     }

@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lottery.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190521034700_InitialDb")]
+    [Migration("20190529050906_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,36 +27,40 @@ namespace Lottery.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("LocationId");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<int?>("OwnerId");
+                    b.Property<int?>("LocalidadId");
+
+                    b.Property<int?>("PropietarioId");
 
                     b.Property<bool>("Status");
 
                     b.Property<string>("UserId");
 
+                    b.Property<int?>("ZonaId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("LocalidadId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("PropietarioId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Lottery_Banks");
+                    b.HasIndex("ZonaId");
+
+                    b.ToTable("Lottery_Banca");
                 });
 
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Location", b =>
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Localidad", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(60);
 
@@ -64,39 +68,114 @@ namespace Lottery.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lottery_Location");
+                    b.ToTable("Lottery_Localidad");
                 });
 
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Lottery", b =>
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Loteria", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasMaxLength(60);
 
                     b.Property<string>("Horario")
                         .HasMaxLength(15);
 
-                    b.Property<bool>("IsAvailabe");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60);
-
                     b.Property<string>("Sigla")
                         .HasMaxLength(5);
 
+                    b.Property<bool>("status");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Lottery_Lottery");
+                    b.ToTable("Lottery_Loteria");
                 });
 
-            modelBuilder.Entity("Lottery.Web.Data.Entities.Owner", b =>
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Premio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<decimal>("DoblesCash3Straingt");
+
+                    b.Property<decimal>("DoblesDirecto");
+
+                    b.Property<decimal>("DoblesPale");
+
+                    b.Property<decimal>("DoblesPlay4Straingt");
+
+                    b.Property<decimal>("DoublesPick5Straingt");
+
+                    b.Property<DateTime?>("Fecha");
+
+                    b.Property<int?>("LoteriaId");
+
+                    b.Property<decimal>("PrimeraDirecto");
+
+                    b.Property<decimal>("PrimeraPale");
+
+                    b.Property<decimal>("PrimeraTripleta");
+
+                    b.Property<decimal>("SecuenciaCash3Straingt");
+
+                    b.Property<decimal>("SecuenciaPick5Straingt");
+
+                    b.Property<decimal>("SecuenciaPlay4Straingt");
+
+                    b.Property<decimal>("SegundoDirecto");
+
+                    b.Property<decimal>("SegundoPale");
+
+                    b.Property<decimal>("SegundoTripleta");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<decimal>("TerceraDirecto");
+
+                    b.Property<decimal>("TerceraPale");
+
+                    b.Property<decimal>("Way10_3IdenticosPick5Box");
+
+                    b.Property<decimal>("Way120_5UnicosPick5Box");
+
+                    b.Property<decimal>("Way12_2IdenticosPlay4Box");
+
+                    b.Property<decimal>("Way20_3IdenticosPick5Box");
+
+                    b.Property<decimal>("Way24_4UnicosPlay4Box");
+
+                    b.Property<decimal>("Way30_2IdenticosPick5Box");
+
+                    b.Property<decimal>("Way3_2IdenticosCash3Box");
+
+                    b.Property<decimal>("Way4_3IdenticosPlay4Box");
+
+                    b.Property<decimal>("Way5_4IdenticosPick5Box");
+
+                    b.Property<decimal>("Way60_2IdenticosPick5Box");
+
+                    b.Property<decimal>("Way6_2IdenticosPlay4Box");
+
+                    b.Property<decimal>("Way6_3UnidadCash3Box");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LoteriaId");
+
+                    b.ToTable("Lottery_Premio");
+                });
+
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Propietario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(60);
 
@@ -104,7 +183,7 @@ namespace Lottery.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lottery_Owner");
+                    b.ToTable("Lottery_Propietario");
                 });
 
             modelBuilder.Entity("Lottery.Web.Data.Entities.User", b =>
@@ -160,6 +239,23 @@ namespace Lottery.Web.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Zona", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.Property<bool>("status");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Lottery_Zona");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -274,17 +370,28 @@ namespace Lottery.Web.Migrations
 
             modelBuilder.Entity("Lottery.Web.Data.Entities.Banca", b =>
                 {
-                    b.HasOne("Lottery.Web.Data.Entities.Location", "Location")
+                    b.HasOne("Lottery.Web.Data.Entities.Localidad", "Localidad")
                         .WithMany()
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("LocalidadId");
 
-                    b.HasOne("Lottery.Web.Data.Entities.Owner", "Owner")
+                    b.HasOne("Lottery.Web.Data.Entities.Propietario", "Propietario")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("PropietarioId");
 
                     b.HasOne("Lottery.Web.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.HasOne("Lottery.Web.Data.Entities.Zona", "Zona")
+                        .WithMany()
+                        .HasForeignKey("ZonaId");
+                });
+
+            modelBuilder.Entity("Lottery.Web.Data.Entities.Premio", b =>
+                {
+                    b.HasOne("Lottery.Web.Data.Entities.Loteria", "Loteria")
+                        .WithMany()
+                        .HasForeignKey("LoteriaId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

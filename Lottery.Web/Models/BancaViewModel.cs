@@ -7,17 +7,26 @@
 
     public class BancaViewModel : Banca
     {
+        internal IEnumerable<SelectListItem> _propietario;
+
         //[Display(Name = "Name Owner")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must select a owner.")]
-        public int OwnerId { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a propiedad.")]
+        public int PropietarioId { get; set; }
 
-        public IEnumerable<SelectListItem> Owner { get; set; }
+        public IEnumerable<SelectListItem> Propietario { get; set; }
 
 
-        //[Display(Name = "Indicate Location")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must select a location.")]
-        public int LocationId { get; set; }
+        [Display(Name = "Indicate Location")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a localidad.")]
+        public int LocalidadId { get; set; }
 
-        public IEnumerable<SelectListItem> Location { get; set; }
+        public IEnumerable<SelectListItem> Localidad { get; set; }
+
+
+        [Display(Name = "Indique Zona")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a zona.")]
+        public int ZonaId { get; set; }
+
+        public new IEnumerable<SelectListItem> Zona { get; set; }
     }
 }

@@ -6,8 +6,10 @@
 
     public interface IBancaRepository : IGenericRepository<Banca>
     {
-        IEnumerable<SelectListItem> GetComboOwner();
+        IEnumerable<SelectListItem> GetComboPropietario();
 
-        IEnumerable<SelectListItem> GetComboLocation();
+        IEnumerable<SelectListItem> GetComboLocalidad();
+
+        IEnumerable<SelectListItem> GetComboZona();
     }
 }

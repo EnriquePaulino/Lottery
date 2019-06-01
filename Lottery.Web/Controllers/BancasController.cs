@@ -1,14 +1,15 @@
 ﻿namespace Lottery.Web.Controllers
 {
-    using System.Threading.Tasks;
-    using Data;
     using Data.Entities;
+    using Data.Repositories;
     using Helpers;
-    using Lottery.Web.Data.Repositories;
-    using Lottery.Web.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Models;
+    using System.Threading.Tasks;
 
+    [Authorize]
     public class BancasController : Controller
     {
         private readonly IBancaRepository bancaRepository;
@@ -46,16 +47,21 @@
         // GET: Products/Create
         public IActionResult Create()
         {
-            var Owner = new BancaViewModel
+            var Propietario = new BancaViewModel
             {
-                Owner = this.bancaRepository.GetComboOwner()
+                Propietario = this.bancaRepository.GetComboPropietario()
             };
 
-            var Location = new BancaViewModel
+            var Localidad = new BancaViewModel
             {
-                Location = this.bancaRepository.GetComboLocation()
+                Localidad = this.bancaRepository.GetComboLocalidad()
             };
-            return this.View(Location);
+
+            var Zona = new BancaViewModel
+            {
+                Zona = this.bancaRepository.GetComboZona()
+            };
+            return this.View(Zona);
         }
 
         // POST: Products/Create

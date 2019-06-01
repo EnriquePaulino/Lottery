@@ -1,10 +1,10 @@
 ﻿@model Lottery.Web.Models.BancaViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Banca";
 }
 
-<h2>Create Banks</h2>
+<h2>Crear Banca</h2>
 <hr />
 
 <div class="container">
@@ -25,21 +25,27 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                             <div class="form-group">
-                                <label asp-for="Name" class="control-label"></label>
-                                <input asp-for="Name" class="form-control" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
+                                <label asp-for="Descripcion" class="control-label"></label>
+                                <input asp-for="Descripcion" class="form-control" />
+                                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                            </div>
+
+                            @*<div class="form-group">
+                                <label asp-for="PropietarioId" class="control-label"></label>
+                                <select asp-for="PropietarioId" asp-items="Model.Propietario" class="form-control"></select>
+                                <span asp-validation-for="PropietarioId" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="OwnerId" class="control-label"></label>
-                                <select asp-for="OwnerId" asp-items="Model.Owner" class="form-control"></select>
-                                <span asp-validation-for="OwnerId" class="text-danger"></span>
-                            </div>
+                                <label asp-for="LocalidadId" class="control-label"></label>
+                                <select asp-for="LocalidadId" asp-items="Model.Localidad" class="form-control"></select>
+                                <span asp-validation-for="LocalidadId" class="text-danger"></span>
+                            </div>*@
 
                             <div class="form-group">
-                                <label asp-for="LocationId" class="control-label"></label>
-                                <select asp-for="LocationId" asp-items="Model.Location" class="form-control"></select>
-                                <span asp-validation-for="LocationId" class="text-danger"></span>
+                                <label asp-for="ZonaId" class="control-label"></label>
+                                <select asp-for="ZonaId" asp-items="Model.Zona" class="form-control"></select>
+                                <span asp-validation-for="ZonaId" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -225,3 +231,30 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+@*<div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class="input-group bootstrap-timepicker  input-append">
+                        <div class="bootstrap-timepicker-widget dropdown-menu">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker3').datetimepicker({
+                                format: 'LT'
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>*@

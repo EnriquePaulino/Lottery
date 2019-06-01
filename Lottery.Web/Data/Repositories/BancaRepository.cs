@@ -14,34 +14,51 @@
             this.context = context;
         }
 
-        public IEnumerable<SelectListItem> GetComboOwner()
+        public IEnumerable<SelectListItem> GetComboPropietario()
         {
-            var list = this.context.Lottery_Owner.Select(o => new SelectListItem
+            var list = this.context.Lottery_Propietario.Select(o => new SelectListItem
             {
-                Text = o.Name,
+                Text = o.Nombre,
                 Value = o.Id.ToString()
             }).OrderBy(o => o.Text).ToList();
 
             list.Insert(0, new SelectListItem
             {
-                Text = "(Select a owner...)",
+                Text = "Seleccione el propietario...",
                 Value = "0"
             });
 
             return list;
         }
 
-        public IEnumerable<SelectListItem> GetComboLocation()
+        public IEnumerable<SelectListItem> GetComboLocalidad()
         {
-            var list = this.context.Lottery_Location.Select(l => new SelectListItem
+            var list = this.context.Lottery_Localidad.Select(l => new SelectListItem
             {
-                Text = l.Name,
+                Text = l.Descripcion,
                 Value = l.Id.ToString()
             }).OrderBy(l => l.Text).ToList();
 
             list.Insert(0, new SelectListItem
             {
-                Text = "(Select a location...)",
+                Text = "Seleccione la localidad...",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetComboZona()
+        {
+            var list = this.context.Lottery_Zona.Select(l => new SelectListItem
+            {
+                Text = l.Descripcion,
+                Value = l.Id.ToString()
+            }).OrderBy(l => l.Text).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "Seleccione la zona...",
                 Value = "0"
             });
 

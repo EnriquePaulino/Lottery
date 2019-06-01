@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Lottery.Web</title>
+
+    <title>IBS Loteria</title>
+
+   @*<title>@ViewData["Title"] - Lottery.Web</title>*@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -35,6 +38,18 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-area="" asp-controller="Bancas" asp-action="Index">Banca</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                    }
+                </ul>
+
             </div>
         </div>
     </nav>
@@ -45,7 +60,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - Lottery.Web</p>
+            <p>&copy; 2019 - IBS Loteria Web</p>
         </footer>
     </div>
 

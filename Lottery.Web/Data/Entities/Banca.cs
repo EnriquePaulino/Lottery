@@ -1,5 +1,6 @@
 ﻿namespace Lottery.Web.Data.Entities
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Banca : IEntity
@@ -12,13 +13,13 @@
         public string Descripcion { get; set; }
 
         [Display(Name = "Nombre Dueño")]
-        public Propietario Propietario { get; set; }
+        public int Propietarios { get; set; }
 
         [Display(Name = "Indique Localidad")]
-        public Localidad Localidad { get; set; }
+        public int Localidad { get; set; }
 
         [Display(Name = "Indique la Zona")]
-        public Zona Zona { get; set; }
+        public int Zona { get; set; }
 
         public bool Status { get; set; }
 

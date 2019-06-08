@@ -8,15 +8,23 @@
     {
         public DbSet<Banca> Lottery_Banca { get; set; }
 
-        public DbSet<Loteria> Lottery_Loteria { get; set; }
+        public DbSet<Pais> Lottery_Pais { get; set; }
 
-        public DbSet<Propietario> Lottery_Propietario { get; set; }
+        //public DbSet<Loteria> Lottery_Loteria { get; set; }
 
-        public DbSet<Localidad> Lottery_Localidad { get; set; }
+        //public DbSet<Propietario> Lottery_Propietario { get; set; }
 
-        public DbSet<Premio> Lottery_Premio { get; set; }
+        //public DbSet<Localidad> Lottery_Localidad { get; set; }
 
-        public DbSet<Zona> Lottery_Zona { get; set; }
+        //public DbSet<Premio> Lottery_Premio { get; set; }
+
+        //public DbSet<Zona> Lottery_Zona { get; set; }
+
+        //public DbSet<Pais> Lottery_Pais { get; set; }
+
+        //public DbSet<Ciudad> Lottery_Ciudad { get; set; }
+
+        //public DbSet<Hora> Lottery_Hora { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

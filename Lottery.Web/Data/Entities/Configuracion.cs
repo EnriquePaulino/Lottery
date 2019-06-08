@@ -10,7 +10,7 @@
     {
         public int Id { get; set; }
 
-        public Zona Zona { get; set; }
+        public int Zona { get; set; }
 
         public int FormaCaida { get; set; }
 

@@ -1,9 +1,9 @@
 ﻿namespace Lottery.Web.Helpers
 {
-    using System.Threading.Tasks;
     using Data.Entities;
     using Lottery.Web.Models;
     using Microsoft.AspNetCore.Identity;
+    using System.Threading.Tasks;
 
     public class UserHelper : IUserHelper
     {

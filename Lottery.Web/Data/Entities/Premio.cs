@@ -8,7 +8,7 @@
         public int Id { get; set; }
 
         [Display(Name = "Nombre Loteria")]
-        public Loteria Loteria { get; set; }
+        public int Loteria { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime? Fecha { get; set; }

@@ -11,6 +11,6 @@
         [Required]
         public string Nombre { get; set; }
 
-        public bool status { get; set; }
+        public bool Status { get; set; }
     }
 }

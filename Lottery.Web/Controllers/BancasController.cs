@@ -15,7 +15,9 @@
         private readonly IBancaRepository bancaRepository;
         private readonly IUserHelper userHelper;
 
-        public BancasController(IBancaRepository bancaRepository, IUserHelper userHelper)
+        public BancasController(
+            IBancaRepository bancaRepository,
+            IUserHelper userHelper)
         {
             this.bancaRepository = bancaRepository;
             this.userHelper = userHelper;
@@ -32,13 +34,13 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("BancaNotFound");
             }
 
             var product = await this.bancaRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("BancaNotFound");
             }
 
             return View(product);
@@ -47,21 +49,14 @@
         // GET: Products/Create
         public IActionResult Create()
         {
-            var Propietario = new BancaViewModel
-            {
-                Propietario = this.bancaRepository.GetComboPropietario()
-            };
-
-            var Localidad = new BancaViewModel
-            {
-                Localidad = this.bancaRepository.GetComboLocalidad()
-            };
-
-            var Zona = new BancaViewModel
-            {
-                Zona = this.bancaRepository.GetComboZona()
-            };
-            return this.View(Zona);
+            //var model = new BancaViewModel
+            //{
+            //    Propietarios = this.bancaRepository.GetComboPropietarios(),
+            //    Localidades = this.bancaRepository.GetComboLocalidades(),
+            //    Zonas = this.bancaRepository.GetComboZonas(),
+            //    Paises = this.bancaRepository.GetComboPaises()
+            //};
+            return this.View();
         }
 
         // POST: Products/Create
@@ -71,8 +66,7 @@
         {
             if (ModelState.IsValid)
             {
-                // TODO: Pending to change to: this.User.Identity.Name
-                banca.User = await this.userHelper.GetUserByEmailAsync("paulinoenrique@gmail.com");
+                banca.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.bancaRepository.CreateAsync(banca);
                 return RedirectToAction(nameof(Index));
             }
@@ -85,13 +79,13 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("BancaNotFound");
             }
 
             var product = await this.bancaRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("BancaNotFound");
             }
 
             return View(product);
@@ -106,15 +100,14 @@
             {
                 try
                 {
-                    // TODO: Pending to change to: this.User.Identity.Name
-                    banca.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                    banca.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.bancaRepository.UpdateAsync(banca);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!await this.bancaRepository.ExistAsync(banca.Id))
                     {
-                        return NotFound();
+                        return new NotFoundViewResult("BancaNotFound");
                     }
                     else
                     {
@@ -132,13 +125,13 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("BancaNotFound");
             }
 
             var product = await this.bancaRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("BancaNotFound");
             }
 
             return View(product);
@@ -152,6 +145,10 @@
             var product = await this.bancaRepository.GetByIdAsync(id);
             await this.bancaRepository.DeleteAsync(product);
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult BancaNotFound()
+        {
+            return this.View();
         }
     }
 }

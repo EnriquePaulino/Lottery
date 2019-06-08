@@ -18,7 +18,6 @@
         [MaxLength(5)]
         public string Sigla { get; set; }
 
-        [Display(Name = "Is Availabe?")]
-        public bool status { get; set; }
+        public bool Status { get; set; }
     }
 }

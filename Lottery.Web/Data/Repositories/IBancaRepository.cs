@@ -3,13 +3,22 @@
     using Entities;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IBancaRepository : IGenericRepository<Banca>
     {
-        IEnumerable<SelectListItem> GetComboPropietario();
+        IEnumerable<Banca> GetAllBancas();
 
-        IEnumerable<SelectListItem> GetComboLocalidad();
+        IEnumerable<Banca> AddBanca(Banca banca);
 
-        IEnumerable<SelectListItem> GetComboZona();
+        Task<bool> SaveAllAsync(Banca banca);
+
+        IEnumerable<SelectListItem> GetComboPropietarios();
+
+        IEnumerable<SelectListItem> GetComboLocalidades();
+
+        IEnumerable<SelectListItem> GetComboZonas();
+
+        IEnumerable<SelectListItem> GetComboPaises();
     }
 }
